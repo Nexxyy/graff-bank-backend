@@ -1,0 +1,41 @@
+spring:
+  datasource:
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+    server:
+      error:
+        include-message: always
+
+  rabbitmq:
+    host: ${RABBITMQ_HOST}
+    port: ${RABBITMQ_PORT}
+    username: ${RABBITMQ_USERNAME}
+    password: ${RABBITMQ_PASSWORD}
+
+    loan-processing:
+      exchange: loan.exchange
+      queue: loan.processing
+      routing-key: loan.processing
+      dlq: loan.processing.dlq
+
+    listener:
+      simple:
+        prefetch: 10
+        concurrency: 3
+        max-concurrency: 10
+
+  security:
+    jwt:
+      private-key: ${JWT_PRIVATE_KEY}
+      public-key: ${JWT_PUBLIC_KEY}
+      issuer: "graff.cash"
+
+    transactions:
+      private-key: ${TRANSFER_PRIVATE_KEY}
+      public-key: ${TRANSFER_PUBLIC_KEY}
+
+  application:
+    name: ledger
