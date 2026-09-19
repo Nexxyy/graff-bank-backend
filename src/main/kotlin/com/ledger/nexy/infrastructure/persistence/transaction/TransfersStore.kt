@@ -11,7 +11,13 @@ import java.util.UUID
 @JdbiRepository
 interface TransfersStore : TransferGateway {
     
-    @SqlQuery("SELECT * FROM transfers WHERE id = :id")
+    @SqlQuery("""
+        SELECT
+        id, source, destination, amount,
+        description, signature, created_at
+        FROM transfers WHERE id = :id
+        """
+    )
     override fun find(id: UUID): Transfer?
     
     @SqlUpdate(

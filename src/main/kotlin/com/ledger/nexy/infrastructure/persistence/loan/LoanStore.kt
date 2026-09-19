@@ -48,7 +48,7 @@ interface LoanStore : LoanGateway {
     )
     override fun save(@BindKotlin loan: Loan)
     
-    @SqlUpdate("UPDATE loan SET status = 'PROCESSING' WHERE id = :id")
+    @SqlUpdate("UPDATE loan SET status = 'PROCESSING' WHERE id = :id AND status = 'PENDING'")
     override fun process(id: UUID): Boolean
     
 }

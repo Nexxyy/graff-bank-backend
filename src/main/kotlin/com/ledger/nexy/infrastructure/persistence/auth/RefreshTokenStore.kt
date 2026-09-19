@@ -33,7 +33,8 @@ interface RefreshTokenStore : RefreshTokenGateway {
     
     @SqlUpdate(
         """
-        DELETE FROM refresh_token
+        UPDATE refresh_token
+        SET revoked = TRUE
         WHERE hash = :hash
         """
     )

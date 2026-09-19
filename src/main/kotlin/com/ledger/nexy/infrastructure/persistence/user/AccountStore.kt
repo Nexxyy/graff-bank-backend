@@ -18,7 +18,7 @@ interface AccountStore : AccountGateway {
     @SqlQuery("SELECT * FROM account WHERE account.owner_id = :ownerId")
     override fun findByOwnerId(ownerId: UUID): Account?
     
-    @SqlQuery("SELECT * FROM account WHERE account.id = :id FOR UPDATE")
+    @SqlQuery("SELECT id, owner_id, balance, created_at FROM account WHERE account.id = :id FOR UPDATE")
     override fun findForUpdate(id: UUID): Account?
     
     @SqlUpdate(

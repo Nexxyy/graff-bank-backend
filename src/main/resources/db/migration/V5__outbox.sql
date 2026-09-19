@@ -16,5 +16,4 @@ CREATE TABLE outbox_event
     published_at TIMESTAMP WITH TIME ZONE
 );
 
-CREATE INDEX index_outbox_pending
-    ON outbox_event (id) WHERE status = 'PENDING';
+CREATE INDEX index_outbox_pending ON outbox_event (id) WHERE status = 'PENDING';

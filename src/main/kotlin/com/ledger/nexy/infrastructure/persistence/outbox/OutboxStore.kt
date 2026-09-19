@@ -42,7 +42,14 @@ interface OutboxStore : OutboxGateway {
     )
     override fun create(@BindKotlin event: OutboxEvent)
     
-    @SqlUpdate("UPDATE outbox_event SET status = 'PUBLISHED' WHERE id = :id")
+    @SqlUpdate(
+        """
+        UPDATE outbox_event SET
+        status = 'PUBLISHED',
+        published_at = CURRENT_TIMESTAMP
+        WHERE id = :id
+        """
+    )
     override fun markAsPublished(id: Long)
     
 }

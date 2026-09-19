@@ -33,7 +33,7 @@ interface TransferIdempotencyStore : TransferIdempotencyGateway {
         """
         UPDATE transfer_idempotency
         SET transfer_id = :transferId
-        WHERE key = :key
+        WHERE key = :key AND transfer_id IS NULL
         """
     )
     override fun complete(key: String, transferId: UUID)
